@@ -1,0 +1,17 @@
+body {
+    background-color:rgb(241, 167, 167);
+    background-image: -moz-repeating-linear-gradient();
+    color:darkslategrey;
+}
+h1 {
+    color: rgb(236, 2, 2);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    
+
+f
+h4 {
+    color: rgb(236, 2, 2);
+}
+p {
+    font-style: italic;
+}
