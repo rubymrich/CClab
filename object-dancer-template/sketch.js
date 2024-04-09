@@ -173,22 +173,6 @@ class RubyDancer {
     ellipse(-5+sin(frameCount * 0.1) * 2,-40,80,20)
     ellipse(-5+sin(frameCount * 0.1) * 2,-50,40,10)
 
-
-
-
-
-
-
-
-    // ⬆️ draw your dancer above ⬆️
-    // ******** //
-
-    // the next function draws a SQUARE and CROSS
-    // to indicate the approximate size and the center point
-    // of your dancer.
-    // it is using "this" because this function, too, 
-    // is a part if your Dancer object.
-    // comment it out or delete it eventually.
     this.drawReferenceShapes()
 
     pop();
