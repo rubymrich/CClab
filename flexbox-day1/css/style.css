@@ -1,0 +1,28 @@
+html, body {
+ 
+  /* max-width: 1000px; */
+  /* padding: 0; */
+}
+
+canvas {
+  display: block;
+}
+
+#mainFlexContainer{
+  background-color: cadetblue;
+  display: flex; 
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+}
+
+
+  /*max-width: 600px */
+  @media (max-width: 800px) {
+    /* CSS rules */
+    #mainFlexContainer{
+
+      flex-direction: column;
+    
+  }  
+}
