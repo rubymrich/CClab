@@ -1,30 +1,84 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width">
 
   <title>CCLab Project</title>
 
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: auto; 
+      }
 
-  <script src="lib/p5.js"></script>
-  <script src="lib/p5.sound.js"></script>
+    #photo-background {
+      width: 100%;
+      
+      object-fit: cover; 
+      position: absolute;
+      top: 0;
+      left: 0;
+      
+    }
+
+    #video-canvas {
+      position: fixed; 
+      /* to center */
+      top: 50%; 
+      left: 50%; 
+      width: 30%;
+      height: 30%; 
+      transform: translate(-50%, -50%);
+    }
+
+    #text-box {
+      position: fixed;
+      top: 180px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(255, 255, 255, 0.7); 
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 
 <body>
-
-  <h1>OOP + Interactive Objects</h1>
-  <a href="index.html">Back</a>
-
-  <!-- the following div will contain the p5 canvas. -->
-  <div id="p5-canvas-container">
-    <!-- p5 canvas will be appended here. -->
+  
+  <img id="photo-background" src="assets/2024.jpg" alt="Background Photo">
+  <div id="text-box">
+    <p>Make the present a joyous memory</p>
   </div>
 
-  <!-- the script tag below should always be at the bottom, right before the closing body tag -->
-  <script src="js/sketch-06.js"></script>
-</body>
+  <canvas id="video-canvas" width="640" height="480"></canvas>
 
+  <a href="index.html">Back</a>
+
+  <script>
+    const videoCanvas = document.getElementById('video-canvas');
+    const ctx = videoCanvas.getContext('2d');
+/*SOURCE: https://stackoverflow.com/questions/77182555/how-to-make-navigator-mediadevices-getusermedia-video-true-work-on-mobile*/
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then((stream) => {
+        videoCanvas.width = videoCanvas.offsetWidth; 
+        videoCanvas.height = videoCanvas.offsetHeight; 
+        const video = document.createElement('video');
+        video.srcObject = stream;
+        video.play();
+
+        function drawVideoFrame() {
+          ctx.drawImage(video, 0, 0, videoCanvas.width, videoCanvas.height);
+          requestAnimationFrame(drawVideoFrame);
+        }
+
+        drawVideoFrame();
+      })
+
+  </script>
+</body>
+<a href="index.html">Back</a>
 </html>

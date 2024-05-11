@@ -1,30 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>CCLab Project</title>
-
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-
-  <script src="lib/p5.js"></script>
-  <script src="lib/p5.sound.js"></script>
+  <title>Video Capture</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <style>
+    body {
+      <photo id="video-background" loop>
+    <source src="assets/2024.jpg" type="video/jpg">
+  </photo>
+      display: flex;
+      position: fixed;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    canvas {
+      border: 2px solid black;
+    }
+  </style>
 </head>
-
 <body>
+  <script>
+    var capture;
+//SOURCE ON HOW TO DO THE WHOLE VIDEO THING: https://editor.p5js.org/khz2004/sketches/XM9Pyw7OD
+    function setup() {
+      createCanvas(390, 240);
+      capture = createCapture(VIDEO);
+      capture.size(320, 240);
+    }
 
-  <h1>OOP + Interactive Objects</h1>
-  <a href="index.html">Back</a>
-
-  <!-- the following div will contain the p5 canvas. -->
-  <div id="p5-canvas-container">
-    <!-- p5 canvas will be appended here. -->
-  </div>
-
-  <!-- the script tag below should always be at the bottom, right before the closing body tag -->
-  <script src="js/sketch-04.js"></script>
+    function draw() {
+      image(capture, 0, 0, 320, 240);
+      filter(POSTERIZE, 5);
+    }
+  </script>
 </body>
-
 </html>

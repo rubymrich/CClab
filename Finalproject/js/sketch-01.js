@@ -11,6 +11,7 @@ let circles = [];
 function setup() {
   let canvas = createCanvas(600, 600);
   canvas.parent("p5-canvas-container");
+
   let centerX = width / 2;
   let centerY = height / 2;
   let radius = 200;
@@ -25,7 +26,7 @@ function setup() {
 }
 
 function draw() {
-  background(255, 130);
+  background(0,42,85, 130);
   for (let circle of circles) {
     circle.update();
     circle.checkMouse();
@@ -58,11 +59,13 @@ class Circle {
       this.color = color(255, 255, 0); 
       if (mouseIsPressed && !sound1.isPlaying()) {
         sound1.play();
-        //if (this.index === 0 or this.index === 2) {
-        if (this.index === 0) {
-          goToNewPage("sketch-02.html");
+        let randomIndex = floor(random(3)); //seems like its getting stuck on the biking page?! 
+        if (randomIndex === 0) {
+          goToNewPage("sketch-02.html"); //biker
+        } else if (randomIndex === 1) {
+          goToNewPage("sketch-03.html");//drawing page
         } else {
-          goToNewPage("sketch-03.html");
+          goToNewPage("sketch-06.html"); //selfie camera
         }
       }
     } else {

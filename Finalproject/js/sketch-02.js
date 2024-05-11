@@ -1,4 +1,7 @@
-//BIKER
+let vid = document.getElementById("video-background");
+let lastMouseX = 0;
+let lastMouseY = 0;
+let lastTime = 0;
 var t = 0;
 let k = 15; 
 let n = 1; 
@@ -6,25 +9,54 @@ let r;
 let theta;
 let angleStep = 0.01;
 let rotationAngle = 0;
+let speed = 0;
 
 function setup() {
   let canvas = createCanvas(500, 400);
   canvas.parent("p5-canvas-container");
+//https://www.w3schools.com/js/js_htmldom_eventlistener.asp
+//https://www.w3schools.com/jsref/jsref_abs.asp
+  document.addEventListener('mousemove', function(event) {
+    let currentTime = new Date().getTime();
+    let deltaX = event.clientX - lastMouseX;
+    let deltaY = event.clientY - lastMouseY;
+    let deltaTime = currentTime - lastTime;
+
+    let speedX = Math.abs(deltaX) / deltaTime;
+    let speedY = Math.abs(deltaY) / deltaTime;
+
+    speed = Math.sqrt(speedX * speedX + speedY * speedY);
+
+    vid.playbackRate = 1 + speed * 0.8; 
+    lastMouseX = event.clientX;
+    lastMouseY = event.clientY;
+    lastTime = currentTime;
+  });
 }
 
 function draw() {
-  background(255);
+  clear();
+
   cycle();
   drawWheel();
   if (mouseIsPressed) {
-   rotationAngle += 0.04; 
+    rotationAngle += speed * 0.4; 
   }
-  
+}
+
+function mousePressed() {
+  vid.play();
+}
+
+function mouseReleased() {
+  vid.pause();
 }
 
 function cycle() {
-  fill(0)
+  fill(155,0,100)
+  stroke(155,0,100)
   //head
+
   circle(width/2,height/3,40)
   //torso
   ellipse(width/2,height/3+45,40,60)
@@ -74,7 +106,7 @@ function drawWheel() {
   circle(width/3,height*.75,100)
   circle(width*.70,height*.75,100)
   //spokes
-  fill(255)
+  fill(0)
   push()
   //source for how I got the wheels to spin https://editor.p5js.org/kk4597/sketches/oOGCPiykM
   translate(width/3, height*.75);
